@@ -7,6 +7,7 @@
 #
 # Program Parameters
 #
+import os
 
 jar_file = '/home/vagrant/miniconda2/pkgs/picard-2.3.0-0/share/picard-2.3.0-0/picard.jar'
 
@@ -18,20 +19,19 @@ default_jvm_mem_opts = ['-Xms512m', '-Xmx1g']
 import subprocess
 import sys
 from os import access, getenv, X_OK
-from os.path import dirname, realpath, join as join_path
 
 def real_dirname(path):
     """Return the symlink-resolved, canonicalized directory-portion of path."""
-    return dirname(realpath(path))
+    return os.path.dirname(os.path.realpath(path))
 
 
 def java_executable():
     """Return the executable name of the Java interpreter."""
     java_home = getenv('JAVA_HOME')
-    java_bin = join_path('bin', 'java')
+    java_bin = os.path.join('bin', 'java')
 
-    if java_home and access(join_path(java_home, java_bin), X_OK):
-        return join_path(java_home, java_bin)
+    if java_home and access(os.path.join(java_home, java_bin), X_OK):
+        return os.path.join(java_home, java_bin)
     else:
         return 'java'
 
@@ -79,7 +79,7 @@ def main():
     else:
         jar_arg = '-jar'
 
-    jar_path = join_path(jar_dir, jar_file)
+    jar_path = os.path.join(jar_dir, jar_file)
 
     java_args = [java]+ mem_opts + prop_opts + [jar_arg] + [jar_path] + pass_args
 
