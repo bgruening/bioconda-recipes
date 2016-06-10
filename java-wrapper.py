@@ -8,18 +8,17 @@
 # Program Parameters
 #
 
-jar_file = 'PeptideShaker-1.1.3.jar'
+jar_file = '/home/vagrant/miniconda2/pkgs/picard-2.3.0-0/share/picard-2.3.0-0/picard.jar'
 
 default_jvm_mem_opts = ['-Xms512m', '-Xmx1g']
 
 # !!! End of parameter section. No user-serviceable code below this line !!!
 
 
+import subprocess
 import sys
-from os import access, getenv, system, X_OK
+from os import access, getenv, X_OK
 from os.path import dirname, realpath, join as join_path
-from subprocess import call
-
 
 def real_dirname(path):
     """Return the symlink-resolved, canonicalized directory-portion of path."""
