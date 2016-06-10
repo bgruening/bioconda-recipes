@@ -82,9 +82,8 @@ def main():
     jar_path = join_path(jar_dir, jar_file)
 
     java_args = [java]+ mem_opts + prop_opts + [jar_arg] + [jar_path] + pass_args
-    java_args = ' '.join(java_args)
 
-    sys.exit(call(java_args, shell=True))
+    sys.exit(subprocess.call(java_args))
 
 
 if __name__ == '__main__':
