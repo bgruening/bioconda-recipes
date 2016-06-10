@@ -48,11 +48,11 @@ def jvm_opts(argv):
     pass_args = []
 
     for arg in argv:
-        if arg[0:2] == '-D':
+        if arg.startswith('-D'):
             prop_opts.append(arg)
-        elif arg[0:3] == '-XX':
+        elif arg.startswith('-XX'):
             prop_opts.append(arg)
-        elif arg[0:3] == '-Xm':
+        elif arg.startwith('-Xm'):
             mem_opts.append(arg)
         else:
             pass_args.append(arg)
@@ -74,7 +74,7 @@ def main():
     jar_dir = real_dirname(sys.argv[0])
     (mem_opts, prop_opts, pass_args) = jvm_opts(sys.argv[1:])
 
-    if pass_args != [] and pass_args[0][0:2] == 'eu':
+    if pass_args != [] and pass_args[0].startwith('eu'):
         jar_arg = '-cp'
     else:
         jar_arg = '-jar'
